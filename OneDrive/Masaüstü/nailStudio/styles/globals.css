@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+:root {
+  /* Ana palet */
+  --mocha: #6f4e37;
+  --platinum: #e5e4e2;
+  --lavender: #e6e0f0;
+
+  /* Yardımcı tonlar */
+  --espresso: #2b1d16;
+  --cocoa: #4a3324;
+  --cream: #f7f3ef;
+  --sand: #eadfd3;
+  --blush: #f6d3dc;
+  --rosewood: #a9697a;
+  --lilac-deep: #b7a6d6;
+  --chrome-hi: #ffffff;
+  --chrome-mid: #cfc9d6;
+  --chrome-lo: #8e8697;
+
+  /* Metin */
+  --ink: #2b1d16;
+  --ink-soft: #6b5a4e;
+  --ink-on-dark: #f7f3ef;
+
+  --line: rgba(111, 78, 55, 0.18);
+}
+
+@theme inline {
+  --color-mocha: var(--mocha);
+  --color-platinum: var(--platinum);
+  --color-lavender: var(--lavender);
+  --color-espresso: var(--espresso);
+  --color-cocoa: var(--cocoa);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-blush: var(--blush);
+  --color-rosewood: var(--rosewood);
+  --color-lilac-deep: var(--lilac-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
+  --font-display: var(--font-bodoni), "Times New Roman", serif;
+  --font-condensed: var(--font-bebas), Impact, sans-serif;
+  --font-script: var(--font-pinyon), cursive;
+  --font-sans: var(--font-barlow), system-ui, sans-serif;
+  --font-mono: var(--font-dmmono), ui-monospace, monospace;
+
+  --text-display-xl: clamp(3.5rem, 11vw, 10rem);
+  --text-display-l: clamp(2.5rem, 7vw, 6rem);
+  --text-h3: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--lavender);
+  color: var(--espresso);
+}
+
+:focus-visible {
+  outline: 2px solid var(--lilac-deep);
+  outline-offset: 2px;
+}
+
+/* Yardımcı sınıflar */
+.container-x {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+@media (min-width: 640px) {
+  .container-x { padding-inline: 32px; }
+}
+@media (min-width: 1024px) {
+  .container-x { padding-inline: 48px; }
+}
+
+.section-y {
+  padding-block: clamp(4rem, 9vw, 8rem);
+}
+
+.font-display-tight {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+.card-shadow {
+  box-shadow: 0 1px 0 rgba(43, 29, 22, 0.04);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.card-shadow:hover {
+  box-shadow: 0 18px 40px -18px rgba(43, 29, 22, 0.35);
+}
+
+/* Dalgalı alt kenar (gül kurusu şablon) */
+.scallop-bottom {
+  --r: 14px;
+  -webkit-mask:
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - var(--r)) no-repeat,
+    radial-gradient(circle var(--r) at 50% 0, #000 98%, transparent 100%) 0 100% / calc(var(--r) * 2) var(--r) repeat-x;
+  mask:
+    linear-gradient(#000, #000) 0 0 / 100% calc(100% - var(--r)) no-repeat,
+    radial-gradient(circle var(--r) at 50% 0, #000 98%, transparent 100%) 0 100% / calc(var(--r) * 2) var(--r) repeat-x;
+}
+
+.underline-link {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Krom blob süzülmesi */
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(14px, -22px, 0) rotate(6deg); }
+}
+.float-slow { animation: float-slow 20s ease-in-out infinite; }
+
+/* Kategori marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 60s linear infinite; width: max-content; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .float-slow, .marquee-track { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
